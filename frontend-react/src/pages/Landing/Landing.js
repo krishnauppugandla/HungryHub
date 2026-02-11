@@ -153,3 +153,4 @@ const RestaurantCard = ({ restaurant }) => (
 );
 
 export default Landing;
+
