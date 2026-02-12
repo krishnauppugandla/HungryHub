@@ -556,3 +556,4 @@ const SellerSettings = ({ restaurant, onUpdated }) => {
 };
 
 export default SellerDashboard;
+
