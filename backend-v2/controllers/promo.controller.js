@@ -74,3 +74,4 @@ const removePromo = asyncHandler(async (req, res) => {
 });
 
 module.exports = { validatePromo, removePromo };
+
