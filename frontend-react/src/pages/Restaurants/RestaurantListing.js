@@ -146,3 +146,4 @@ const RestaurantCard = ({ restaurant }) => (
 );
 
 export default RestaurantListing;
+
