@@ -1,0 +1,26 @@
+.restaurant-item {
+  cursor: pointer;
+  text-align: center;
+}
+
+.restaurant-item__icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.restaurant-item__name {
+  font-size: 1.1rem;
+  margin-bottom: 0.3rem;
+}
+
+.restaurant-item__owner {
+  color: #6b7280;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.restaurant-item__cta {
+  color: #ff6b35;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
