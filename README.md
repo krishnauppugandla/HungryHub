@@ -1,127 +1,139 @@
-# 🍔 HungryHub — Food Delivery Platform
+<div align="center">
 
-A full-stack multi-vendor food delivery platform where customers browse restaurants, place orders, and track deliveries in real time. Restaurant owners manage menus and incoming orders from a live dashboard. Admins oversee the entire platform.
+# 🍔 HungryHub
 
-**Live Demo:** https://hungry-hub-opal.vercel.app  
-**Backend API:** https://hungryhub-ldbp.onrender.com
+### A full-stack multi-vendor food delivery platform
 
-> ⚠️ The backend is hosted on Render's free tier and spins down after 15 minutes of inactivity. The first request may take 30–50 seconds to wake it up. Subsequent requests are fast.
+[![React](https://img.shields.io/badge/React_19-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev)
+[![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org)
+[![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com)
+[![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)](https://mongodb.com)
+[![Socket.io](https://img.shields.io/badge/Socket.io-010101?style=for-the-badge&logo=socketdotio&logoColor=white)](https://socket.io)
+[![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 
----
+**[🚀 Live Demo](https://hungry-hub-opal.vercel.app)** &nbsp;·&nbsp; **[📡 API](https://hungryhub-ldbp.onrender.com/health)**
 
-## Tech Stack
+> ⚡ First load may take 30–50 seconds — the backend is on Render's free tier and sleeps after inactivity.
 
-| Layer | Technology |
-|-------|------------|
-| Frontend | React 19, React Router v7, Tailwind CSS |
-| Backend | Node.js, Express |
-| Database | MongoDB + Mongoose |
-| Auth | JWT access tokens (15 min) + refresh tokens (7 days, httpOnly cookie) |
-| Real-time | Socket.io (order status push notifications) |
-| Security | bcrypt, helmet, express-rate-limit, CORS |
+</div>
 
 ---
 
-## Features
+## What is HungryHub?
 
-### Customer
-- Browse and search restaurants by name or cuisine type
-- View menus with dietary tags (vegetarian, spicy)
-- Add to cart, adjust quantities, remove items
-- Apply promo codes at checkout for discounts
-- Save multiple delivery addresses, set a default
-- Place orders with cash on delivery or card
-- Real-time order status tracking via WebSocket
-- Order history with full order details
+HungryHub is a production-style food delivery web app with three fully separate user roles — **customer**, **restaurant owner**, and **admin** — each with their own dedicated experience. It implements the kind of real-world features you'd find in apps like DoorDash or Uber Eats: live order tracking, a promo code engine, role-based access control, JWT auth with silent refresh, and WebSocket-based push notifications.
 
-### Seller (Restaurant Owner)
-- Dashboard with today's revenue, order count, and recent activity
-- Real-time new order alerts pushed via Socket.io
-- Update order status: Accept → Preparing → Out for Delivery → Delivered
-- Menu management — add, edit, toggle availability, delete items
-- Restaurant settings — name, cuisine, delivery fee, estimated time, open/close toggle
-
-### Admin
-- Platform stats — total users, restaurants, revenue, and today's orders
-- User management — search by name/email, filter by role, suspend accounts
-- Restaurant management — feature/unfeature, activate/deactivate
-- Order management with status override
+The entire stack is built from scratch — no app templates, no prebuilt admin panels.
 
 ---
 
-## Try the Live Demo
+## Key Technical Highlights
 
-Visit **https://hungry-hub-opal.vercel.app** and use one of the accounts below.
+- **Real-time order tracking** using Socket.io rooms — customers and sellers each join separate rooms, and status updates push instantly without polling
+- **JWT auth with silent refresh** — short-lived access tokens (15 min) auto-refresh in the background using httpOnly cookie refresh tokens (7 days), keeping users logged in without re-prompting
+- **Role-based access control** enforced at both the Express middleware layer and React route level — no seller can touch customer routes and vice versa
+- **Promo code engine** with per-user usage limits, minimum order validation, and discount persistence stored on the cart — consumed cleanly at order creation
+- **MongoDB aggregation pipelines** powering the admin dashboard — today's revenue, order counts, and platform stats computed server-side
+- **Rate limiting + Helmet** — API is protected with environment-aware rate limits (relaxed in dev, strict in production)
 
-### Demo Accounts
+---
+
+## Features by Role
+
+<details>
+<summary><b>👤 Customer</b></summary>
+
+- Browse and search restaurants by name or cuisine
+- View menus with vegetarian and spicy tags
+- Add items to cart, update quantities, remove items
+- Apply promo codes for discounts before checkout
+- Save multiple delivery addresses and set a default
+- Place orders (cash on delivery or card)
+- Real-time order status tracking with a live progress bar
+- Full order history with itemized details
+
+</details>
+
+<details>
+<summary><b>🏪 Seller (Restaurant Owner)</b></summary>
+
+- Dashboard with today's revenue, order count, and status breakdown
+- Real-time new order alerts via Socket.io — no page refresh needed
+- Update order status through the full lifecycle: Accept → Preparing → Out for Delivery → Delivered
+- Add, edit, toggle availability, and delete menu items
+- Update restaurant info — cuisine types, delivery fee, estimated time, open/close toggle
+
+</details>
+
+<details>
+<summary><b>🛡️ Admin</b></summary>
+
+- Platform-wide stats — total users, restaurants, revenue, and today's orders
+- Search and filter users by role, suspend accounts
+- Feature or deactivate restaurants
+- View and override any order's status
+
+</details>
+
+---
+
+## Live Demo
+
+**URL:** https://hungry-hub-opal.vercel.app
+
+### Accounts
 
 | Role | Email | Password |
 |------|-------|----------|
-| **Customer** | customer@hungryhub.com | Customer@123 |
-| **Seller** — Mario's Pizzeria | mario@hungryhub.com | Seller@123 |
-| **Seller** — Jake's Burger Joint | jake@hungryhub.com | Seller@123 |
-| **Seller** — Sakura Sushi | yuki@hungryhub.com | Seller@123 |
-| **Seller** — La Taqueria | sofia@hungryhub.com | Seller@123 |
-| **Seller** — Spice Garden | priya@hungryhub.com | Seller@123 |
-| **Admin** | admin@hungryhub.com | Admin@123 |
+| Customer | customer@hungryhub.com | Customer@123 |
+| Seller — Mario's Pizzeria | mario@hungryhub.com | Seller@123 |
+| Seller — Jake's Burger Joint | jake@hungryhub.com | Seller@123 |
+| Seller — Sakura Sushi | yuki@hungryhub.com | Seller@123 |
+| Seller — La Taqueria | sofia@hungryhub.com | Seller@123 |
+| Seller — Spice Garden | priya@hungryhub.com | Seller@123 |
+| Admin | admin@hungryhub.com | Admin@123 |
 
 ### Promo Codes
 
-| Code | Discount | Minimum Order |
-|------|----------|---------------|
+| Code | Benefit | Min. Order |
+|------|---------|------------|
 | `WELCOME20` | 20% off (max $10) | $15 |
 | `HUNGRY5` | $5 off | $25 |
-| `FREESHIP` | Free delivery | Any amount |
+| `FREESHIP` | Free delivery | Any |
 
-### How to test each role
+### Suggested Test Flow
 
-**As a Customer:**
-1. Log in with `customer@hungryhub.com`
-2. Browse restaurants on the Restaurants page
-3. Click a restaurant → add items to your cart
-4. Go to Cart → apply a promo code → proceed to Checkout
-5. Fill in a delivery address → place the order
-6. You'll be redirected to the Order Tracking page with live status updates
-
-**As a Seller:**
-1. Log in with any seller account (e.g. `mario@hungryhub.com`)
-2. You land on the Seller Dashboard — see today's stats
-3. Go to the **Orders** tab to see incoming orders and update their status
-4. Go to the **Menu** tab to add or manage menu items
-5. Go to **Settings** to update restaurant info or toggle open/closed
-
-**As an Admin:**
-1. Log in with `admin@hungryhub.com`
-2. View platform-wide stats at the top
-3. Use the **Users** tab to search and manage accounts
-4. Use the **Restaurants** tab to feature or deactivate restaurants
-5. Use the **Orders** tab to view and override any order's status
-
-> **Tip:** Open two browser windows — one as a customer placing an order and one as the matching seller — to see real-time Socket.io updates in action.
+**To see real-time updates in action:**
+1. Open two browser windows side by side
+2. In window 1 — log in as **Customer**, add items to cart, place an order
+3. In window 2 — log in as the matching **Seller** (e.g. mario@hungryhub.com for Mario's Pizzeria)
+4. In the seller window, go to Orders → accept the order
+5. Watch window 1 — the order tracking page updates live without any refresh
 
 ---
 
-## Run Locally
+## Getting Started Locally
 
 ### Prerequisites
-- Node.js 18+
-- MongoDB installed and running locally
 
-### 1. Clone the repo
+- Node.js 18+
+- MongoDB running locally
+
+### 1. Clone
 
 ```bash
 git clone https://github.com/krishnauppugandla/HungryHub.git
 cd HungryHub
 ```
 
-### 2. Set up the backend
+### 2. Backend setup
 
 ```bash
 cd backend-v2
 npm install
 ```
 
-Create a `.env` file inside `backend-v2/`:
+Create `backend-v2/.env`:
 
 ```env
 PORT=8001
@@ -136,35 +148,32 @@ JWT_REFRESH_EXPIRES=7d
 NODE_ENV=development
 ```
 
-Seed the database with restaurants, menus, users, and promo codes:
+Seed the database (creates 7 users, 5 restaurants, full menus, and 3 promo codes):
 
 ```bash
 node scripts/seed.js
 ```
 
-This creates all the demo accounts listed above and 5 restaurants with full menus.
-
-Start the backend:
+Start the server:
 
 ```bash
 nodemon server.js
 ```
 
-Backend runs at **http://localhost:8001**
+Runs on **http://localhost:8001**
 
-### 3. Set up the frontend
-
-Open a new terminal:
+### 3. Frontend setup
 
 ```bash
+# In a new terminal
 cd frontend-react
 npm install
 npm start
 ```
 
-Frontend runs at **http://localhost:3000**
+Runs on **http://localhost:3000**
 
-Log in with any of the demo credentials above — they work the same locally and on the live demo.
+The same demo credentials work locally after seeding.
 
 ---
 
@@ -173,68 +182,68 @@ Log in with any of the demo credentials above — they work the same locally and
 ```
 HungryHub/
 ├── backend-v2/
-│   ├── controllers/        # Request handlers — auth, cart, orders, restaurants, etc.
-│   ├── models/             # Mongoose schemas — User, Restaurant, MenuItem, Order, Cart, etc.
-│   ├── routes/             # Express routers — one file per resource
-│   ├── middleware/         # JWT auth, error handler, rate limiter
-│   ├── services/           # Token signing/verification, email service
-│   ├── utils/              # AppError, asyncHandler, apiResponse helpers
-│   ├── scripts/seed.js     # Database seeder
-│   └── server.js           # App entry point + Socket.io setup
+│   ├── controllers/       # Auth, cart, orders, restaurants, menu items, promo, admin
+│   ├── models/            # User, Restaurant, MenuItem, Order, Cart, PromoCode, Review
+│   ├── routes/            # Express routers — one file per resource
+│   ├── middleware/        # JWT auth guard, global error handler, rate limiter
+│   ├── services/          # Token signing/verification, email service
+│   ├── utils/             # AppError, asyncHandler, apiResponse
+│   ├── scripts/seed.js    # One-command database seeder
+│   └── server.js          # Entry point — Express + Socket.io setup
 │
 └── frontend-react/
     └── src/
-        ├── pages/
-        │   ├── Auth/           # Login, Register
-        │   ├── Landing/        # Home page
-        │   ├── Restaurants/    # Restaurant listing + detail
-        │   ├── Cart/           # Cart page
-        │   ├── Checkout/       # Checkout flow
-        │   ├── Orders/         # Order history, confirmation, tracking
-        │   ├── Profile/        # User profile + saved addresses
-        │   ├── Seller/         # Seller dashboard
-        │   └── Admin/          # Admin dashboard
-        ├── contexts/           # AuthContext (user + tokens), CartContext (cart state)
-        ├── hooks/              # useSocket, useDebounce
-        ├── services/api.js     # Axios instance with JWT interceptor + silent token refresh
-        ├── constants/api.js    # All API endpoint strings in one place
-        └── shared/             # Reusable components — Navbar, ProtectedRoute, UI elements
+        ├── pages/         # Auth, Landing, Restaurants, Cart, Checkout, Orders,
+        │                  # Profile, Seller Dashboard, Admin Dashboard
+        ├── contexts/      # AuthContext — user state + token management
+        │                  # CartContext — cart state + sync with backend
+        ├── hooks/         # useSocket (Socket.io connection), useDebounce
+        ├── services/      # Axios instance with JWT interceptor + silent token refresh
+        ├── constants/     # All API endpoint strings centralised
+        └── shared/        # Navbar, ProtectedRoute, reusable UI components
 ```
 
 ---
 
-## API Overview
+## API Reference
 
-| Method | Endpoint | Auth | Description |
-|--------|----------|------|-------------|
-| POST | `/api/auth/register` | Public | Create a new account |
-| POST | `/api/auth/login` | Public | Login, receive access + refresh tokens |
+| Method | Endpoint | Access | Description |
+|--------|----------|--------|-------------|
+| POST | `/api/auth/register` | Public | Register a new account |
+| POST | `/api/auth/login` | Public | Login — returns access token + sets refresh cookie |
+| POST | `/api/auth/refresh` | Public | Silent token refresh using httpOnly cookie |
 | POST | `/api/auth/logout` | User | Invalidate refresh token |
-| GET | `/api/restaurants` | Public | List restaurants with search + pagination |
-| GET | `/api/restaurants/:id` | Public | Get single restaurant |
-| POST | `/api/restaurants` | Seller | Create a restaurant |
-| PATCH | `/api/restaurants/:id` | Seller | Update restaurant details |
-| GET | `/api/menu-items/restaurant/:id` | Public | Get menu for a restaurant |
-| POST | `/api/menu-items` | Seller | Add a menu item |
+| GET | `/api/restaurants` | Public | List with search, cuisine filter, pagination |
+| GET | `/api/restaurants/featured` | Public | Featured restaurants |
+| POST | `/api/restaurants` | Seller | Create restaurant |
+| PATCH | `/api/restaurants/:id` | Seller | Update restaurant |
+| PATCH | `/api/restaurants/:id/toggle-open` | Seller | Toggle open/closed |
+| GET | `/api/menu-items/restaurant/:id` | Public | Get restaurant menu |
+| POST | `/api/menu-items` | Seller | Add menu item |
+| PATCH | `/api/menu-items/:id` | Seller | Update menu item |
 | POST | `/api/cart/add` | Customer | Add item to cart |
-| PATCH | `/api/cart/item/:itemId` | Customer | Update cart item quantity |
-| DELETE | `/api/cart/item/:itemId` | Customer | Remove item from cart |
-| POST | `/api/promo/validate` | Customer | Validate and apply a promo code |
-| POST | `/api/orders` | Customer | Place an order |
-| GET | `/api/orders/my` | Customer | Get order history |
+| PATCH | `/api/cart/item/:itemId` | Customer | Update quantity |
+| DELETE | `/api/cart/item/:itemId` | Customer | Remove item |
+| POST | `/api/promo/validate` | Customer | Apply promo code to cart |
+| POST | `/api/promo/remove` | Customer | Remove applied promo |
+| POST | `/api/orders` | Customer | Place order |
+| GET | `/api/orders/my` | Customer | Order history |
+| GET | `/api/orders/:id` | User | Single order detail |
 | PATCH | `/api/orders/:id/status` | Seller | Update order status |
-| GET | `/api/admin/stats` | Admin | Platform-wide stats |
+| GET | `/api/admin/stats` | Admin | Platform stats |
+| GET | `/api/admin/users` | Admin | All users with filters |
+| GET | `/api/admin/orders` | Admin | All orders |
 
 ---
 
 ## Socket.io Events
 
-| Event | Direction | Description |
-|-------|-----------|-------------|
-| `join-order-room` | Client → Server | Customer subscribes to updates for a specific order |
-| `join-restaurant-room` | Client → Server | Seller subscribes to their restaurant's order stream |
-| `new-order` | Server → Seller | Fires when a customer places an order |
-| `order-status-update` | Server → Customer | Fires when a seller updates order status |
+| Event | Direction | Trigger |
+|-------|-----------|---------|
+| `join-order-room` | Client → Server | Customer opens order tracking page |
+| `join-restaurant-room` | Client → Server | Seller opens their dashboard |
+| `new-order` | Server → Seller | Customer places an order |
+| `order-status-update` | Server → Customer | Seller changes order status |
 
 ---
 
