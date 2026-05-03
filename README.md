@@ -4,6 +4,8 @@ A full-stack food delivery web app where customers can browse restaurants, place
 
 Built with **React**, **Node.js**, **Express**, **MongoDB**, and **Socket.io**.
 
+**Live Demo:** https://hungry-hub-opal.vercel.app
+
 ---
 
 ## Tech Stack
@@ -51,7 +53,34 @@ Built with **React**, **Node.js**, **Express**, **MongoDB**, and **Socket.io**.
 
 ---
 
-## Getting Started
+## Demo Credentials
+
+Use these to try the live demo or after running the seed script locally.
+
+| Role | Email | Password |
+|------|-------|----------|
+| **Customer** | customer@hungryhub.com | Customer@123 |
+| **Seller** (Mario's Pizzeria) | mario@hungryhub.com | Seller@123 |
+| **Seller** (Jake's Burger Joint) | jake@hungryhub.com | Seller@123 |
+| **Seller** (Sakura Sushi) | yuki@hungryhub.com | Seller@123 |
+| **Seller** (La Taqueria) | sofia@hungryhub.com | Seller@123 |
+| **Seller** (Spice Garden) | priya@hungryhub.com | Seller@123 |
+| **Admin** | admin@hungryhub.com | Admin@123 |
+
+**Promo codes to test at checkout:**
+- `WELCOME20` — 20% off (orders over $15, max $10 off)
+- `HUNGRY5` — $5 off (orders over $25)
+- `FREESHIP` — free delivery on any order
+
+> **Customer flow:** Log in → Browse restaurants → Add items to cart → Apply promo code → Checkout → Track order in real time
+>
+> **Seller flow:** Log in → View dashboard → Manage incoming orders → Update order status to push live updates to customer
+>
+> **Admin flow:** Log in → View platform stats → Manage users and restaurants
+
+---
+
+## Getting Started Locally
 
 ### Prerequisites
 - Node.js 18+
@@ -89,7 +118,7 @@ NODE_ENV=development
 Seed the database with sample restaurants, menus, and users:
 
 ```bash
-node scripts/seed.js --fresh
+node scripts/seed.js
 ```
 
 Start the backend:
@@ -110,22 +139,6 @@ npm start
 ```
 
 Frontend runs on **http://localhost:3000**
-
----
-
-## Demo Credentials
-
-| Role | Email | Password |
-|------|-------|----------|
-| **Customer** | john@example.com | password123 |
-| **Seller** | mario@example.com | password123 |
-| **Admin** | admin@hungryhub.com | admin123456 |
-
-> **Customer flow:** Log in → Browse restaurants → Add items to cart → Apply promo code `SAVE10` → Checkout → Track order
->
-> **Seller flow:** Log in → View dashboard → Go to Orders tab to manage incoming orders → Menu tab to add/edit items
->
-> **Admin flow:** Log in → View platform stats → Manage users and restaurants
 
 ---
 
